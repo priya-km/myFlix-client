@@ -12,7 +12,7 @@ browsers and libraries such as React, the client-side of an app is today conside
 important as the server-side. Full-stack developers need to be well-versed in both server-side and
 client-side development.
 <br>
-<h1> The 5 Ws<h1>
+<h1> The 5 Ws</h1>
 
 1. Who: The users of your myFlix app—movie enthusiasts who enjoy reading information about
 different movies.
@@ -54,7 +54,7 @@ Achievement project.
 ● Returns data (description, genre, director, image) about a single movie to the user
 ● Allows users to add a movie to their list of favorites
 
-<h2>Login view<h2>
+<h2>Login view</h2>
 ● Allows users to log in with a username and password
 
 <h2>Signup view</h2>
