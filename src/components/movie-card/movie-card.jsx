@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export const MovieCard = ({ movie, onMovieClick }) => {
   return (
     <div
@@ -9,3 +11,13 @@ export const MovieCard = ({ movie, onMovieClick }) => {
     </div>
   );
 };
+
+MovieCard.propTypes = {
+    movie: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      genre: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      director: PropTypes.string
+    }).isRequired,
+    onMovieClick: PropTypes.func.isRequired
+  };
