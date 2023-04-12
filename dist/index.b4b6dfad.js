@@ -27162,11 +27162,11 @@ const MainView = ()=>{
         fetch("https://myflixapp.onrender.com/movies").then((response)=>response.json()).then((data)=>{
             const moviesFromApi = data.map((movie)=>{
                 const obj = {
-                    id: movie.id,
+                    id: movie._id,
                     title: movie.Title,
                     description: movie.Description,
-                    genre: movie.Genre,
-                    director: movie.Director
+                    genre: movie.Genre.Name,
+                    director: movie.Director.Name
                 };
                 return obj;
             });
@@ -27178,14 +27178,14 @@ const MainView = ()=>{
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 25,
+        lineNumber: 31,
         columnNumber: 7
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "There are no movies to display."
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 29,
+        lineNumber: 35,
         columnNumber: 12
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27196,12 +27196,12 @@ const MainView = ()=>{
                 }
             }, movies.id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 35,
+                lineNumber: 41,
                 columnNumber: 5
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 33,
+        lineNumber: 39,
         columnNumber: 5
     }, undefined);
 };

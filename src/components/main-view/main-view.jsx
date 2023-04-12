@@ -12,7 +12,13 @@ export const MainView = () => {
       .then((response) => response.json())
       .then((data) => {
         const moviesFromApi = data.map((movie) => {
-          const obj = { id: movie.id, title: movie.Title, description: movie.Description, genre: movie.Genre, director: movie.Director }
+          const obj = {
+            id: movie._id,
+            title: movie.Title,
+            description: movie.Description,
+            genre: movie.Genre.Name,
+            director: movie.Director.Name
+          }
           return obj;
         });
 
