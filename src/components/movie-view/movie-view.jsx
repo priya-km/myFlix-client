@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+import { Button } from "react-bootstrap/Button";
 
 export const MovieView = ({ movie, onBackClick }) => {
   return (
