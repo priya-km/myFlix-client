@@ -1,3 +1,5 @@
+import { Button } from "react-bootstrap";
+
 export const MovieView = ({ movie, onBackClick }) => {
   return (
     <div>
