@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Button } from "react-bootstrap/Button";
-import { Form } from "react-bootstrap/Form";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
@@ -62,7 +62,7 @@ export const SignupView = () => {
         <Form.Control
           type="text"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
           minLength="3"
           />
           </Form.Group>

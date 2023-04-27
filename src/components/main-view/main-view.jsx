@@ -3,9 +3,9 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view"; 
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
-import { Row } from "react-bootstrap/Row";
-import { Col } from "react-bootstrap/Col";
-import { Button } from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -20,19 +20,18 @@ export const MainView = () => {
     if (!token) {
       return;
     }
-    // set loading before sending API request
     setLoading(true);
     fetch("https://myflixapp.onrender.com/movies", {
       headers: {Authorization: `Bearer ${token}`}
     })
       .then((response) => response.json())
       .then((data) => {
-        // stops loading after response received
+
         setLoading(false);
         console.log('data', data);
         const moviesFromApi = data.map((movie) => {
           return {
-          // value names match to API database
+        
           id: movie._id,
           title: movie.Title,
           image: movie.ImagePath,
@@ -63,9 +62,8 @@ export const MainView = () => {
           movie={selectedMovie} 
           onBackClick={() => setSelectedMovie(null)} 
         />
-        <Button variant="secondary" size="sm" onClick={() => {setUser(null); setToken(null); localStorage.clear(); }}>Logout</Button>
+        <Button onClick={() => {setUser(null); setToken(null); localStorage.clear(); }}>Logout</Button>
         </Col>
-        // displays text message if list of movies is empty
       ) : movies.length === 0 ? (
         <p>No movies found.</p>
         
@@ -85,7 +83,7 @@ export const MainView = () => {
             />
             </Col>
           ))}
-          <Button md="1" variant="secondary" size="sm" onClick={() => {setUser(null);}}>Logout</Button>
+          <Button onClick={() => {setUser(null);}}>Logout</Button>
         </>
       )}
     </Row>
