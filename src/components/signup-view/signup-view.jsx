@@ -93,7 +93,7 @@ export const SignupView = () => {
           required
         />
       </Form.Group>
-      <Button variant="primary" type="submit" disabled={loading}>
+      <Button className="logout-button" variant="primary" style={{ color: 'white' }} type="submit" disabled={loading}>
         {loading ? "Loading..." : "Submit"}
       </Button>
     </Form>

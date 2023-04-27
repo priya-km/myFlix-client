@@ -65,7 +65,7 @@ export const LoginView = ({ onLoggedIn }) => {
         />
       </Form.Group>
 
-      <Button variant="primary" type="submit" disabled={isLoading}>
+      <Button className="logout-button" variant="primary" style={{ color: 'white' }} type="submit" disabled={isLoading}>
         {isLoading ? "Loading..." : "Submit"}
       </Button>
     </Form>

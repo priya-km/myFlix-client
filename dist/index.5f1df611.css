@@ -10,6 +10,15 @@ img {
   width: 100%;
 }
 
+.logout-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.back-button {
+  margin-top: 10px;
+}
+
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;

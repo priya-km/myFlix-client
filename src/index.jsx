@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 //main comp
 const App = () => { 
   return (
-   <Container>
+   <Container style={{ marginTop: '50px' }}>
       <MainView />
     </Container>);
 };

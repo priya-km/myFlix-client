@@ -62,7 +62,16 @@ export const MainView = () => {
           movie={selectedMovie} 
           onBackClick={() => setSelectedMovie(null)} 
         />
-        <Button onClick={() => {setUser(null); setToken(null); localStorage.clear(); }}>Logout</Button>
+            <Button
+              className="logout-button"
+              style={{ color: 'white' }}
+              onClick={() =>
+              {
+                setUser(null);
+                setToken(null);
+                localStorage.clear();
+              }}>Logout
+            </Button>
         </Col>
       ) : movies.length === 0 ? (
         <p>No movies found.</p>
@@ -83,10 +92,14 @@ export const MainView = () => {
             />
             </Col>
           ))}
-                    <Button onClick={() => {
+                    <Button
+                      className="logout-button"
+                      style={{ color: 'white' }}
+                      onClick={() => {
                       setUser(null);
                       setToken(null);
                       localStorage.clear();
+                      
                     }} size="sm">Logout</Button>
         </>
       )}

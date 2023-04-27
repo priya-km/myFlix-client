@@ -2934,6 +2934,9 @@ var _containerDefault = parcelHelpers.interopDefault(_container);
 //main comp
 const App = ()=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _containerDefault.default), {
+        style: {
+            marginTop: "50px"
+        },
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mainView.MainView), {}, void 0, false, {
             fileName: "src/index.jsx",
             lineNumber: 10,
@@ -27248,6 +27251,10 @@ const MainView = ()=>{
                     columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
+                    className: "logout-button",
+                    style: {
+                        color: "white"
+                    },
                     onClick: ()=>{
                         setUser(null);
                         setToken(null);
@@ -27257,7 +27264,7 @@ const MainView = ()=>{
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
                     lineNumber: 65,
-                    columnNumber: 9
+                    columnNumber: 13
                 }, undefined)
             ]
         }, void 0, true, {
@@ -27268,19 +27275,19 @@ const MainView = ()=>{
             children: "No movies found."
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 68,
+            lineNumber: 77,
             columnNumber: 9
         }, undefined) : loading ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
             children: "Loading..."
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 71,
+            lineNumber: 80,
             columnNumber: 13
         }, undefined) : !movies || !movies.length ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
             children: "No movies found..."
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 73,
+            lineNumber: 82,
             columnNumber: 13
         }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
             children: [
@@ -27294,15 +27301,19 @@ const MainView = ()=>{
                             }
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 78,
+                            lineNumber: 87,
                             columnNumber: 13
                         }, undefined)
                     }, movie.id, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 77,
+                        lineNumber: 86,
                         columnNumber: 12
                     }, undefined)),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
+                    className: "logout-button",
+                    style: {
+                        color: "white"
+                    },
                     onClick: ()=>{
                         setUser(null);
                         setToken(null);
@@ -27312,7 +27323,7 @@ const MainView = ()=>{
                     children: "Logout"
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 86,
+                    lineNumber: 95,
                     columnNumber: 21
                 }, undefined)
             ]
@@ -29714,7 +29725,8 @@ const MovieView = ({ movie , onBackClick  })=>{
                 onClick: onBackClick,
                 className: "back-button",
                 style: {
-                    cursor: "pointer"
+                    cursor: "pointer",
+                    color: "white"
                 },
                 children: "Back"
             }, void 0, false, {
@@ -29845,7 +29857,11 @@ const LoginView = ({ onLoggedIn  })=>{
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
+                className: "logout-button",
                 variant: "primary",
+                style: {
+                    color: "white"
+                },
                 type: "submit",
                 disabled: isLoading,
                 children: isLoading ? "Loading..." : "Submit"
@@ -30634,7 +30650,11 @@ const SignupView = ()=>{
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
+                className: "logout-button",
                 variant: "primary",
+                style: {
+                    color: "white"
+                },
                 type: "submit",
                 disabled: loading,
                 children: loading ? "Loading..." : "Submit"

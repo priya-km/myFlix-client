@@ -26,10 +26,12 @@ export const MovieView = ({ movie, onBackClick }) => {
       <Button
         onClick={onBackClick}
         className="back-button"
-        style={{ cursor: "pointer" }}
+        style={{ cursor: "pointer", color: "white"}}
       >
         Back
       </Button>
     </div>
+    
+    
   );
 };
