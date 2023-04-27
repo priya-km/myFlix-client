@@ -83,7 +83,11 @@ export const MainView = () => {
             />
             </Col>
           ))}
-          <Button onClick={() => {setUser(null);}}>Logout</Button>
+                    <Button onClick={() => {
+                      setUser(null);
+                      setToken(null);
+                      localStorage.clear();
+                    }} size="sm">Logout</Button>
         </>
       )}
     </Row>

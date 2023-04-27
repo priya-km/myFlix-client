@@ -5,40 +5,44 @@ import Button from "react-bootstrap/Button";
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
-    const handleSubmit = (event) => {
-        // this prevents the default behavior of the form which is to reload the entire page
-        event.preventDefault();
+  const handleSubmit = (event) => {
+    // this prevents the default behavior of the form which is to reload the entire page
+    event.preventDefault();
+    setLoading(true);
 
-        const data = {
-            Username: username,
-            Password: password
-        };
-
-        fetch("https://myflixapp.onrender.com/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log("Login response:", data);
-                if (data.user) {
-                    localStorage.setItem("user", JSON.stringify(data.user));
-                    localStorage.setItem("token", data.token);
-                    onLoggedIn(data.user, data.token);
-                } else {
-                    alert("No such user");
-                }
-            })
-            .catch((e) => {
-                alert("Something went wrong");
-            });
+    const data = {
+      Username: username,
+      Password: password
     };
-    // Login form
-   return (
+
+    fetch("https://myflixapp.onrender.com/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Login response:", data);
+        if (data.user) {
+          localStorage.setItem("user", JSON.stringify(data.user));
+          localStorage.setItem("token", data.token);
+          onLoggedIn(data.user, data.token);
+        } else {
+          alert("No such user");
+        }
+        setLoading(false);
+      })
+      .catch((e) => {
+        alert("Something went wrong");
+        setLoading(false);
+      });
+  };
+  // Login form
+  return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="formUsername">
         <Form.Label>Username:</Form.Label>
@@ -61,10 +65,9 @@ export const LoginView = ({ onLoggedIn }) => {
         />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Submit
+      <Button variant="primary" type="submit" disabled={isLoading}>
+        {isLoading ? "Loading..." : "Submit"}
       </Button>
     </Form>
   );
 };
-

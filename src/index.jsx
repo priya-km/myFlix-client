@@ -5,10 +5,10 @@ import Container from "react-bootstrap/Container";
 
 //main comp
 const App = () => { 
-  return
+  return (
    <Container>
       <MainView />
-    </Container>;
+    </Container>);
 };
 
 //find root of the app
