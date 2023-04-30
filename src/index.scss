@@ -1,5 +1,13 @@
-$color: steelblue;
+$primary: MediumPurple;
+$body-bg: White;
 
-.my-flix {
-  color: $color;
+.logout-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
+
+.back-button {
+  margin-top: 10px;
+}
+
+@import "~bootstrap/scss/bootstrap";

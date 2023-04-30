@@ -3,6 +3,9 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view"; 
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -23,85 +26,83 @@ export const MainView = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // stop loading once response is recieved
+
         setLoading(false);
         console.log('data', data);
         const moviesFromApi = data.map((movie) => {
           return {
-          // names must match with API DB
+        
           id: movie._id,
           title: movie.Title,
           image: movie.ImagePath,
           description: movie.Description,
           genre: movie.Genre.Name,
-          director: movie.Director.Name,
+          director: movie.Director.Name
           }
         });
         setMovies(moviesFromApi);
       })
   }, [token])
 
-  // User login or signup
-  if (!user) {
-    return (
-      <>
-        <LoginView onLoggedIn={(user, token) => {
-          setUser(user);
-          setToken(token);
-        }} />
-        or
-        <SignupView />
-      </>
-    )
-  }
-
-  // Movie view for selected movie
-  if (selectedMovie) {
-    return (
-      <>
-      <button onClick={() => { setUser(null); setToken(null); localStorage.clear();
-      }}
-      > Logout 
-      </button>
-      <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
-      </>
-    );
-  }
-
-  // if no movies found:
-  if (movies.length === 0) {
-    return (
-      <>
-      <button onClick={() => { setUser(null); setToken(null); localStorage.clear();
-      }}
-      > Logout
-      </button>
-      <div>No movies found...</div>
-    </>
-    );
-  }
-
+   // User must log in or sign up 
   return (
-    loading ? (
-      <p>Loading...</p>
-    ) : !movies || !movies.length ? (
-      <p>No movies found...</p>
-    ) : (
-    <div>
-      <button onClick={() => { setUser(null); setToken(null); localStorage.clear();
-      }}
-    > Logout
-    </button>
-    
-      {movies.map((movie) => (
-        <MovieCard
-          key={movie._id}
-          movie={movie}
-          onMovieClick={(newSelectedMovie) => {
-            setSelectedMovie(newSelectedMovie);
-          }}
+    <Row className="justify-content-md-center">
+      {!user ? (
+        <>
+          <Col md={5}>
+          <LoginView onLoggedIn={(user, token) => {setUser(user); setToken(token)}} /> 
+          
+          <SignupView />
+          </Col>
+        </>
+        // Movie view when a movie is clicked on
+      ) : selectedMovie ? (
+        <Col md={8} style={{ border: "1px solid black" }}>
+        <MovieView 
+          movie={selectedMovie} 
+          onBackClick={() => setSelectedMovie(null)} 
         />
-      ))}
-    </div>
-  ));
-}
+            <Button
+              className="logout-button"
+              style={{ color: 'white' }}
+              onClick={() =>
+              {
+                setUser(null);
+                setToken(null);
+                localStorage.clear();
+              }}>Logout
+            </Button>
+        </Col>
+      ) : movies.length === 0 ? (
+        <p>No movies found.</p>
+        
+      ) : loading ? (
+            <p>Loading...</p>
+          ) : !movies || !movies.length ? (
+            <p>No movies found...</p>
+          ) : (
+            <>
+          {movies.map((movie) => (
+           <Col className="mb-5" key={movie.id} md={3}>
+            <MovieCard
+              movie={movie}
+              onMovieClick={(newSelectedMovie) => {
+                setSelectedMovie(newSelectedMovie);
+              }}
+            />
+            </Col>
+          ))}
+                    <Button
+                      className="logout-button"
+                      style={{ color: 'white' }}
+                      onClick={() => {
+                      setUser(null);
+                      setToken(null);
+                      localStorage.clear();
+                      
+                    }} size="sm">Logout</Button>
+        </>
+      )}
+    </Row>
+    );
+  };

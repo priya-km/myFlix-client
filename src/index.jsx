@@ -1,10 +1,14 @@
 import { createRoot } from 'react-dom/client'; 
 import { MainView } from './components/main-view/main-view';
-import './index.scss';
+import "./index.scss";
+import Container from "react-bootstrap/Container";
 
 //main comp
 const App = () => { 
-    return <MainView />;
+  return (
+   <Container style={{ marginTop: '50px' }}>
+      <MainView />
+    </Container>);
 };
 
 //find root of the app
