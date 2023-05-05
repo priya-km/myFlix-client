@@ -46422,7 +46422,8 @@ const MovieView = ({ movies  })=>{
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
                                 children: [
-                                    "Genre Description: ",
+                                    movie.genre.Name,
+                                    " Description: ",
                                     movie.genre.Description
                                 ]
                             }, void 0, true, {
@@ -46435,6 +46436,9 @@ const MovieView = ({ movies  })=>{
                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                                     className: "back-button",
                                     variant: "primary",
+                                    style: {
+                                        color: "white"
+                                    },
                                     children: "Back"
                                 }, void 0, false, {
                                     fileName: "src/components/movie-view/movie-view.jsx",
