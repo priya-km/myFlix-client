@@ -40,13 +40,6 @@ export const MovieView = ({ movies }) => {
                 Back
               </Button>
             </Link>
-            <Button
-              className="favorite-button"
-              variant={isFavorite ? 'danger' : 'outline-danger'}
-              onClick={handleFavoriteClick}
-            >
-              {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
-            </Button>
           </Card.Body>
         </Card>
               ) : null}

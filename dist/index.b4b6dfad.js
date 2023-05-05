@@ -46445,16 +46445,6 @@ const MovieView = ({ movies  })=>{
                                 fileName: "src/components/movie-view/movie-view.jsx",
                                 lineNumber: 38,
                                 columnNumber: 27
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
-                                className: "favorite-button",
-                                variant: isFavorite ? "danger" : "outline-danger",
-                                onClick: handleFavoriteClick,
-                                children: isFavorite ? "Remove from Favorites" : "Add to Favorites"
-                            }, void 0, false, {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 43,
-                                columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
