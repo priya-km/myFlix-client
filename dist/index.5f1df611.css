@@ -7,7 +7,26 @@
 }
 
 img {
-  width: 100%;
+  width: 60%;
+}
+
+.movie-image {
+  width: 60%;
+  height: 60%;
+  align-content: center;
+}
+
+.movie-view-container {
+  align-content: center;
+}
+
+.movie-card {
+  align-items: center;
+}
+
+.favorite-button {
+  margin-top: 10px;
+  margin-left: 50px;
 }
 
 .logout-button {

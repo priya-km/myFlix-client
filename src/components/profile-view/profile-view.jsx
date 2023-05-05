@@ -1,184 +1,187 @@
-import { useState } from "react";
-import { MovieCard } from "../movie-card/movie-card";
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import { UserInfo } from "./user-info";
-import { useParams } from "react-router";
-import { Card, Container, Col, Row, Button, Form } from "react-bootstrap";
-import './profile-view.scss';
+import { FavoriteMovies } from "./favorite-movies";
+import UpdateUser from "./update-user";
 
+export const ProfileView = ({movies, onAddFavorite, onRemoveFavorite}) => {
+  const [user, setUser] = useState({movies});
+  const [favorites, setFavorites] = useState([]);
+   const [loading, setLoading] = useState(false);  
 
-
-export const ProfileView = ({ user, token, onLoggedOut, movies }) => {
-   // const [updatedUser, setUpdatedUser] = useState(false);
-    const { movieId } = useParams();
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
-    const [birthday, setBirthday] = useState("");
-    const token = localStorage.getItem("token");
-    const storedUser = JSON.parse(localStorage.getItem("user"))
-    console.log ("User profile view", storedUser);
-
-
-    
-    const favMovies = movies.filter((movie) => storedUser.FavoriteMovies.includes(movie.id));
-    console.log ("Favorite movies view", favMovies); 
-
-
-    // Updating user info
-    const handleUpdate = (e) => {
-    
-      e.preventDefault(); 
-      
-      const data = {
-        Username: username,
-        Name: name,
-        Password: password,
-        Email: email,
-        Birthday: birthday
-      };
-
-      console.log(data);
-
-      fetch(`https://myflixapp.onrender.com/users/${storedUser.Username}`, {
-          
-          method: "PUT",
-          
-          headers: {
-          Authorization : `Bearer ${localStorage.getItem('token')}`,
-          "Content-Type": "application/json"
-          },
-          body: JSON.stringify(data)
-
-        }).then((response)=>response.json())
-          .then((data)=> { 
-          console.log(data);
-          localStorage.setItem("user", JSON.stringify(data.user));
-          alert("Your changes were saved. You will now be redirected to the login page.");
-          localStorage.clear();
-          window.location.reload();
-          
-        }).catch((e)=>{
-        alert("Something went wrong.");
-        console.log(e);
-        })
-    }; 
-    
-  
-    // Deleting user info
-    const handleDeregister = () => { 
-    
-        fetch(`https://myflixapp.onrender.com/users/${storedUser.Username}`, {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          }
-        }).then((response) => {
-           if (response.ok) {
-            localStorage.clear();
-            alert("Account successfully deleted.");
-            <Navigate to="/signup" />
-           }
-            else {
-            alert("There was an error deleting your account.")
-            window.location.reload();
-          }
-        }).catch((e)=>{
-          alert("Something went wrong.")
-          window.location.reload();
-          console.log(e);
-
+  useEffect(() => {
+    fetch("/users")
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("There was an error retrieving your information");
       })
-    };
+      .then((data) => {
+        const loggedInUser = data.find((u) => u.UserName === "your-UserName");
+        setUser(loggedInUser);
+      })
+      .catch((error) => {
+        console.log(error)
+      });
 
+    fetch("/movies")
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("There was an error.");
+      })
+      .then((data) => {
+        setMovies(data);
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+  }, []);
+
+   const handleAddToFavorites = (movieId) => {
+    console.log('movieId:', movieId);
+    console.log('movies:', movies);
+  
+    const movieToAdd = movies.find((movie) => movie.id === movieId);
+    console.log('movieToAdd:', movieToAdd);
+    const user =JSON.parse(localStorage.getItem('user'))
+  
+    
+    if (favorites && favorites.some((movie) => movie.id === movieId)) {
+        console.log(`The movie ${movieId} is already in your favorites.`);
+      } else if (movieToAdd) {
+      setFavorites([...favorites, movieToAdd]);
+      fetch(`https://myflixapp.onrender.com/users/${user.Username}/movies/${movieId}`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Success:', data);
+          let newUserData = JSON.stringify(data);
+          localStorage.setItem('user', newUserData);
+          alert('Movie successfully added to your favorites list.');
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          alert('There was an error adding the movie to your favorites list.');
+        });
+    } else {
+      alert('This movie is already in your favorites list.');
+    }
+  };  
+  
+ const handleRemoveFromFavorites = (movieId) => {
+  const userData = JSON.parse(localStorage.getItem('user'));
+  const { FavoriteMovies } = userData;
+  const favorites = [... FavoriteMovies]
+  const newFavorites = favorites.filter((id) => id !== movieId);
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  // Remove from favorites
+  if (favorites && favorites.some((id) => id === movieId)) {
+    setFavorites(newFavorites);
+    // Show a loading spinner
+    setLoading(true);
+    fetch(`https://myflixapp.onrender.com/users/${user.Username}/movies/${movieId}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('There was an error removing this movie from your favorites');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Favorite movie removed', data);
+        let newUserData = JSON.stringify(data);
+        localStorage.setItem('user', newUserData);
+        // Hide the loading spinner
+        setLoading(false);
+        // Display a custom message
+        alert('Movie successfully removed from your favorites list.');
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        // Hide the loading spinner
+        setLoading(false);
+        // Display a custom error message
+        alert('There was an error removing the movie from your favorites list.');
+      });
+  } else {
+    // Display a custom message
+    alert('This movie is not in your favorites list...yet');
+  }
+};
+
+  const updateUser = (updatedUser) => {
+    fetch(`/users/${user.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: updatedUser.email,
+        name: updatedUser.name,
+        birthday: updatedUser.birthday,
+        UserName: updatedUser.UserName,
+        password: updatedUser.password,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("There was an error, please try again.");
+      })
+      .then((data) => {
+        setUser(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleUserInfoChange = (updatedUser) => {
+    setUser((prevUser) => ({ ...prevUser, ...updatedUser }));
+  };
 
   return (
-    <Container >
-      <Row>
-        <Col xs={12} sm={4}>
-          <Card style={{marginTop: 30, backgroundColor: "whitesmoke"}}>
-            <Card.Body>
-              <UserInfo username={storedUser.Username} email={storedUser.Email} handleDeregister={handleDeregister} /> 
-            </Card.Body>
-          </Card>
-        </Col>
-
-        <Col xs={12} sm={8}>
-          <Card style={{marginTop: 30, backgroundColor: "whitesmoke", marginBottom: 30}}>
-          <Card.Body>
-              <Card.Title>Update Information</Card.Title>
-              <Form className="w-100" onSubmit={handleUpdate}> 
-              <Form.Group controlId="updateFormUsername">
-                <Form.Label>Username:</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={username}
-                  onChange={event => setUsername(event.target.value)} 
-                  minLength="5" 
-                  placeholder="Enter username (min 5 characters)"
-
-                />
-              </Form.Group>
-
-              <Form.Group controlId="updatePassword">
-                <Form.Label style={{ marginTop: 10 }} >Password:</Form.Label>
-                <Form.Control
-                  type="password"
-                  value={password}
-                  onChange={event => setPassword(event.target.value)}
-                  placeholder="Password"
-
-                />
-              </Form.Group>
-
-              <Form.Group controlId="updateFormEmail">
-                <Form.Label style={{ marginTop: 10 }} >Email:</Form.Label>
-                <Form.Control
-                  type="email"
-                  value={email}
-                  onChange={event => setEmail(event.target.value)}
-                  placeholder="Enter email"
-                />
-              </Form.Group>
-
-              <Form.Group controlId="updateFormBirthday">
-                <Form.Label style={{ marginTop: 10 }} >Birthday: </Form.Label>
-                <Form.Control
-                  type="date"
-                  value={birthday}
-                  onChange={event => setBirthday(event.target.value)}
-                />
-              </Form.Group>
-
-              <Button variant="primary" type="submit" style={{ margin: '0.7rem'}} onClick={handleUpdate}>
-                Save Changes
-              </Button>
-              </Form>
-
-            </Card.Body>
-          </Card>
-        </Col>
-
-      </Row>
-      <>
+    <>
+      
+      <Container>
+        <div className="d-flex justify-content-center text-center,mb-5">
+        <h1>Your Profile</h1>
+        </div>
+      </Container>
+      <Container>
+        <div className="d-flex justify-content-center text-center">
+      <Container>
         <Row>
-          {favMovies.length === 0 ? ( 
-          <h4> There are no movies in your favorites. </h4>
-          ) : (
-          <>  
-            <h4>Favorite Movies</h4>
-            {favMovies.map((movie)=>( 
-              <Col xs={12} md={6} lg={3} key={movie.id} className="fav-movie">
-                  <MovieCard 
-                    movie = {movie}
-                    />
-              </Col>
-            ))}              
-          </>
-          )}  
+          <Col md={4}>
+            <UserInfo
+              email={user.email}
+              name={user.name}
+              birthday={user.birthday}
+              onUserChange={handleUserInfoChange}
+            />
+            <UpdateUser user={user} handleSubmit={updateUser} />
+          </Col>
+          <Col md={6}>
+            <FavoriteMovies
+                  movies={movies}
+                  favorites={favorites}
+              onAddFavorite={handleAddToFavorites}
+              onRemoveFavorite={handleRemoveFromFavorites}
+            />
+          </Col>
         </Row>
-                
-      </>
-  </Container>
+          </Container>
+        </div>
+        </Container>
+        </>
   );
 };
