@@ -22,7 +22,7 @@ export const MainView = () => {
   useEffect(() => {
       if (!token) return;
      // setLoading(true);
-    fetch("https://myflixapp.onrender.com/movies", {
+    fetch("https://myflix-pkm.herokuapp.com/movies", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
@@ -63,7 +63,7 @@ export const MainView = () => {
         console.log(`The movie ${movieId} is already in your favorites.`);
       } else if (movieToAdd) {
       setFavorites([...favorites, movieToAdd]);
-      fetch(`https://myflixapp.onrender.com/users/${user.Username}/movies/${movieId}`, {
+      fetch(`https://myflix-pkm.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
@@ -95,7 +95,7 @@ export const MainView = () => {
     setFavorites(newFavorites);
     // Show a loading spinner
     setLoading(true);
-    fetch(`https://myflixapp.onrender.com/users/${user.Username}/movies/${movieId}`, {
+    fetch(`https://myflix-pkm.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
       method: 'DELETE',
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     })

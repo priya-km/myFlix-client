@@ -53,7 +53,7 @@ export const ProfileView = ({movies, onAddFavorite, onRemoveFavorite}) => {
         console.log(`The movie ${movieId} is already in your favorites.`);
       } else if (movieToAdd) {
       setFavorites([...favorites, movieToAdd]);
-      fetch(`https://myflixapp.onrender.com/users/${user.Username}/movies/${movieId}`, {
+      fetch(`https://myflix-pkm.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
