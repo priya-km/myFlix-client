@@ -93,7 +93,7 @@ export const MainView = () => {
   // Remove from favorites
   if (favorites && favorites.some((id) => id === movieId)) {
     setFavorites(newFavorites);
-    // Show a loading spinner
+    // Show loading spinner
     setLoading(true);
     fetch(`https://myflix-pkm.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
       method: 'DELETE',
@@ -109,20 +109,16 @@ export const MainView = () => {
         console.log('Favorite movie removed', data);
         let newUserData = JSON.stringify(data);
         localStorage.setItem('user', newUserData);
-        // Hide the loading spinner
+        // Hides the loading spinner
         setLoading(false);
-        // Display a custom message
         alert('Movie successfully removed from your favorites list.');
       })
       .catch((error) => {
         console.error('Error:', error);
-        // Hide the loading spinner
         setLoading(false);
-        // Display a custom error message
         alert('There was an error removing the movie from your favorites list.');
       });
   } else {
-    // Display a custom message
     alert('This movie is not in your favorites list...yet');
   }
 };

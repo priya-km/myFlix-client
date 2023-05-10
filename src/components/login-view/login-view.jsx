@@ -9,7 +9,6 @@ export const LoginView = ({ onLoggedIn }) => {
   const [ loading, setLoading] = useState(false);
 
   const handleSubmit = (event) => {
-    // this prevents the default behavior of the form which is to reload the entire page
     event.preventDefault();
     setLoading(true);
 
