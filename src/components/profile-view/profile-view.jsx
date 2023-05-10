@@ -73,7 +73,7 @@ export const ProfileView = ({movies, onAddFavorite, onRemoveFavorite}) => {
     }
   };  
   
- const handleRemoveFromFavorites = (movieId) => {
+  const handleRemoveFromFavorites = (movieId) => {
   const userData = JSON.parse(localStorage.getItem('user'));
   const { FavoriteMovies } = userData;
   const favorites = [... FavoriteMovies]
