@@ -27189,7 +27189,7 @@ const MainView = ()=>{
     (0, _react.useEffect)(()=>{
         if (!token) return;
         // setLoading(true);
-        fetch("https://myflixapp.onrender.com/movies", {
+        fetch("https://myflix-pkm.herokuapp.com/movies", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -27227,7 +27227,7 @@ const MainView = ()=>{
                 ...favorites,
                 movieToAdd
             ]);
-            fetch(`https://myflixapp.onrender.com/users/${user.Username}/movies/${movieId}`, {
+            fetch(`https://myflix-pkm.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -27256,7 +27256,7 @@ const MainView = ()=>{
             setFavorites(newFavorites);
             // Show a loading spinner
             setLoading(true);
-            fetch(`https://myflixapp.onrender.com/users/${user.Username}/movies/${movieId}`, {
+            fetch(`https://myflix-pkm.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -46518,7 +46518,7 @@ const LoginView = ({ onLoggedIn  })=>{
             Username: username,
             Password: password
         };
-        fetch("https://myflixapp.onrender.com/login", {
+        fetch("https://myflix-pkm.herokuapp.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -46715,7 +46715,7 @@ const SignupView = ()=>{
             email: email,
             Birthday: birthday
         };
-        fetch("https://myflixapp.onrender.com/users", {
+        fetch("https://myflix-pkm.herokuapp.com/users", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -47107,7 +47107,7 @@ const ProfileView = ({ movies , onAddFavorite , onRemoveFavorite  })=>{
                 ...favorites,
                 movieToAdd
             ]);
-            fetch(`https://myflixapp.onrender.com/users/${user.Username}/movies/${movieId}`, {
+            fetch(`https://myflix-pkm.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -47136,7 +47136,7 @@ const ProfileView = ({ movies , onAddFavorite , onRemoveFavorite  })=>{
             setFavorites(newFavorites);
             // Show a loading spinner
             setLoading(true);
-            fetch(`https://myflixapp.onrender.com/users/${user.Username}/movies/${movieId}`, {
+            fetch(`https://myflix-pkm.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`

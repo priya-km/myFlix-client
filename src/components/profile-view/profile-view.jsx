@@ -85,7 +85,7 @@ export const ProfileView = ({movies, onAddFavorite, onRemoveFavorite}) => {
     setFavorites(newFavorites);
     // Show a loading spinner
     setLoading(true);
-    fetch(`https://myflixapp.onrender.com/users/${user.Username}/movies/${movieId}`, {
+    fetch(`https://myflix-pkm.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
       method: 'DELETE',
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     })
