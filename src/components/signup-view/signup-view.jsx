@@ -19,7 +19,7 @@ export const SignupView = () => {
       Username: username,
       Name: name,
       Password: password,
-      email: email,
+      Email: email,
       Birthday: birthday
     };
 
