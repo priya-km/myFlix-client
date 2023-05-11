@@ -4,7 +4,8 @@ import Button from "react-bootstrap/Button";
 import { Row, Col, Card, CardGroup } from 'react-bootstrap';
 
 export const SignupView = () => {
-  const [Username, setUsername] = useState("");
+  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
@@ -14,23 +15,9 @@ export const SignupView = () => {
     event.preventDefault();
     setLoading(true);
 
-     if (Username.length < 3) {
-        alert("Username must be at least 3 characters long");
-        return;
-      }
-  
-      if (password.length < 8) {
-        alert("Password must be at least 8 characters long");
-        return;
-      }
-  
-      if (!/\S+@\S+\.\S+/.test(email)) {
-        alert("Invalid email address");
-        return;
-      }
-
     const data = {
-      Username: Username,
+      Username: username,
+      Name: name,
       Password: password,
       email: email,
       Birthday: birthday
@@ -43,13 +30,19 @@ export const SignupView = () => {
         "Content-Type": "application/json"
       }
     }).then((response) => {
+      setLoading(false);
       if (response.ok) {
         alert("Signup successful");
         window.location.reload();
       } else {
         alert("Signup failed");
       }
-    });
+    })
+      .catch((error) => {
+        setLoading(false);
+        console.error("Signup error", error);
+        alert("Something went wrong");
+      });
   };
 
   return (
@@ -64,14 +57,14 @@ export const SignupView = () => {
                   <Form.Label>Username:</Form.Label>
                   <Form.Control
                     type="text"
-                    value={Username}
+                    value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
                     minLength="5"
                   />
                 </Form.Group>
 
-                <Form.Group controlId="formSignupPassword">
+                <Form.Group controlId="formPassword">
                   <Form.Label>Password:</Form.Label>
                   <Form.Control
                     type="password"
@@ -81,7 +74,15 @@ export const SignupView = () => {
                     minLength="8"
                   />
                 </Form.Group>
-
+                <Form.Group controlId="formName">
+                  <Form.Label>Name:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    minLength="3"
+                            />
+                  </Form.Group>
                 <Form.Group controlId="formEmail">
                   <Form.Label>Email:</Form.Label>
                   <Form.Control

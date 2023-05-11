@@ -124,7 +124,7 @@ export const ProfileView = ({movies, onAddFavorite, onRemoveFavorite}) => {
         email: updatedUser.email,
         name: updatedUser.name,
         birthday: updatedUser.birthday,
-        UserName: updatedUser.UserName,
+        Username: updatedUser.Username,
         password: updatedUser.password,
       }),
     })

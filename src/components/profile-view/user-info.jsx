@@ -14,7 +14,7 @@ export const UserInfo = ({ email, name, birthday, onUserChange }) => {
         throw new Error("Error, please try again.");
       })
       .then(data => {
-        const loggedInUser = data.find(u => u.UserName === "your-UserName");
+        const loggedInUser = data.find(u => u.Username === "your-Username");
         setUser(loggedInUser);
       })
       .catch(error => {
