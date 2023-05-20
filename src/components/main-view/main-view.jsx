@@ -130,7 +130,7 @@ export const MainView = () => {
       <Row className="justify-content-md-center">
         <Routes>
           <Route
-            path="/"
+            path="/login"
             element={
               !user ? (
                 <>
@@ -170,7 +170,22 @@ export const MainView = () => {
                 </>
               )
             }
-                  />
+          />
+          
+            <Route
+              path="/signup"
+              element={
+                <>
+                  {user ? (
+                    <Navigate to="/" />
+                  ) : (
+                    <Col md={6}>
+                      <SignupView />
+                    </Col>
+                  )}
+                </>
+              }
+            />
                   
         {/* // Route to individual movie view  */}
           <Route
