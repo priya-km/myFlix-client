@@ -130,7 +130,7 @@ export const MainView = () => {
       <Row className="justify-content-md-center">
         <Routes>
           <Route
-            path="/login"
+            path="/"
             element={
               !user ? (
                 <>
