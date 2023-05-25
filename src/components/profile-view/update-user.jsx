@@ -13,12 +13,21 @@ export default function UpdateUser({ user, handleSubmit }) {
   return (
     <form className="profile-form" onSubmit={(e) => handleSubmit(e, updatedUser)}>
       <h3>Update Your Account Information</h3>
-      <Form.Group controlId="formUserName">
+      <Form.Group controlId="formUsername">
         <Form.Label>Username:</Form.Label>
         <Form.Control
           type="text"
-          name="UserName"
-          value={updatedUser.UserName}
+          name="Username"
+          value={updatedUser.Username}
+          onChange={(e) => handleUpdate(e)}
+        />
+      </Form.Group>
+      <Form.Group controlId="formName">
+        <Form.Label>Display Name:</Form.Label>
+        <Form.Control
+          type="text"
+          name="name"
+          value={updatedUser.name}
           onChange={(e) => handleUpdate(e)}
         />
       </Form.Group>

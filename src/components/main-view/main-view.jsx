@@ -8,6 +8,7 @@ import { ProfileView } from "../profile-view/profile-view";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { BrowserRouter, Routes, Route, Navigate, } from "react-router-dom";
+/* import axios from 'axios'; */
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -21,7 +22,7 @@ export const MainView = () => {
 
   useEffect(() => {
       if (!token) return;
-     // setLoading(true);
+      setLoading(true);
     fetch("https://myflix-pkm.herokuapp.com/movies", {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -126,9 +127,19 @@ export const MainView = () => {
   
   return (
     <BrowserRouter>
-      <NavigationBar user={user} onLoggedOut={handleLogout}/>
+      <NavigationBar
+              user={user}
+              onLoggedOut={() => {
+              setUser(null)
+              setToken(null);
+              localStorage.clear();
+              window.location.reload();
+            }}
+          />
       <Row className="justify-content-md-center">
         <Routes>
+          {/*  // Home page with login and signup views  */}
+         
           <Route
             path="/"
             element={
@@ -137,9 +148,10 @@ export const MainView = () => {
                   <Col md={5} className="mb-1.5">
                     <LoginView
                       className="form"
-                      onLoggedIn={(user, token) => {
+                      onLoggedIn={async (user, token) => {
                         setUser(user);
                         setToken(token);
+                        
                       }}
                     />
                   </Col>
@@ -159,7 +171,13 @@ export const MainView = () => {
                   <Col xs={12} className="mb-1.5">
                   </Col>
                   {movies.map((movie) => (
-                    <Col key={movie.id} xs={12} sm={6} md={4} lg={3} className="mb-5">
+                    <Col
+                      key={movie.id}
+                      xs={12}
+                      sm={6}
+                      md={4}
+                      lg={3}
+                      className="mb-5">
                       <MovieCard movie={movie} 
                        fav={user.FavoriteMovies.includes(movie.id)}
                       onAddToFavorites={(movieId) => handleAddToFavorites(movieId)} 
@@ -185,19 +203,35 @@ export const MainView = () => {
                   )}
                 </>
               }
-            />
-                  
-        {/* // Route to individual movie view  */}
+          />
+          
+
+              {/*     // need a /movies request w token <<< movie csr tho */}
+        {/* // Route to individual movie view, reroutes user back to homepage if not signed in  */}
           <Route
-            path="/movies/:movieId" 
-                      element={<MovieView movies={movies}
-                      />}
+            path="/movies/:movieId"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/" replace />
+                ) : movies.length === 0 ? (
+                  <></>
+                ) : (
+                      <MovieView
+                        user={user}
+                        token={token}
+                        movies={movies}
+                  />
+                )}
+              </>
+            }
                   />
                   
         {/* Route to user profile view */}
           <Route 
+            // fix username path?
             path="/users/:Username"
-            element={<ProfileView user={user} movies={movies}/>}
+            element={<ProfileView user={user} token={token} movies={movies}/>}
           />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
