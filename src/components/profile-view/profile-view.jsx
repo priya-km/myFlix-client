@@ -5,10 +5,10 @@ import { FavoriteMovies } from "./favorite-movies";
 import UpdateUser from "./update-user";
 import './profile-view.scss';
 
-export const ProfileView = ({movies, onAddFavorite, onRemoveFavorite}) => {
-  const [user, setUser] = useState({movies});
+export const ProfileView = ({ movies, onAddFavorite, onRemoveFavorite }) => {
+  const [user, setUser] = useState({ movies });
   const [favorites, setFavorites] = useState([]);
-   const [loading, setLoading] = useState(false);  
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetch("/users")
@@ -41,18 +41,18 @@ export const ProfileView = ({movies, onAddFavorite, onRemoveFavorite}) => {
       });
   }, []);
 
-   const handleAddToFavorites = (movieId) => {
+  const handleAddToFavorites = (movieId) => {
     console.log('movieId:', movieId);
     console.log('movies:', movies);
   
     const movieToAdd = movies.find((movie) => movie.id === movieId);
     console.log('movieToAdd:', movieToAdd);
-    const user =JSON.parse(localStorage.getItem('user'))
+    const user = JSON.parse(localStorage.getItem('user'))
   
     
     if (favorites && favorites.some((movie) => movie.id === movieId)) {
-        console.log(`The movie ${movieId} is already in your favorites.`);
-      } else if (movieToAdd) {
+      console.log(`The movie ${movieId} is already in your favorites.`);
+    } else if (movieToAdd) {
       setFavorites([...favorites, movieToAdd]);
       fetch(`https://myflix-pkm.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
         method: 'POST',
@@ -72,48 +72,48 @@ export const ProfileView = ({movies, onAddFavorite, onRemoveFavorite}) => {
     } else {
       alert('This movie is already in your favorites list.');
     }
-  };  
+  };
   
   const handleRemoveFromFavorites = (movieId) => {
-  const userData = JSON.parse(localStorage.getItem('user'));
-  const { FavoriteMovies } = userData;
-  const favorites = [... FavoriteMovies]
-  const newFavorites = favorites.filter((id) => id !== movieId);
-  const user = JSON.parse(localStorage.getItem('user'));
+    const userData = JSON.parse(localStorage.getItem('user'));
+    const { FavoriteMovies } = userData;
+    const favorites = [...FavoriteMovies]
+    const newFavorites = favorites.filter((id) => id !== movieId);
+    const user = JSON.parse(localStorage.getItem('user'));
 
-  // Remove from favorites
-  if (favorites && favorites.some((id) => id === movieId)) {
-    setFavorites(newFavorites);
-    // Show loading spinner
-    setLoading(true);
-    fetch(`https://myflix-pkm.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
-      method: 'DELETE',
-      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('There was an error removing this movie from your favorites');
-        }
-        return response.json();
+    // Remove from favorites
+    if (favorites && favorites.some((id) => id === movieId)) {
+      setFavorites(newFavorites);
+      // Show loading spinner
+      setLoading(true);
+      fetch(`https://myflix-pkm.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
-      .then((data) => {
-        console.log('Favorite movie removed', data);
-        let newUserData = JSON.stringify(data);
-        localStorage.setItem('user', newUserData);
-        // Hide the loading spinner
-        setLoading(false);
-        alert('Movie successfully removed from your favorites list.');
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        // Hides the loading spinner
-        setLoading(false);
-        alert('There was an error removing the movie from your favorites list.');
-      });
-  } else {
-    alert('This movie is not in your favorites list...yet');
-  }
-};
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('There was an error removing this movie from your favorites');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log('Favorite movie removed', data);
+          let newUserData = JSON.stringify(data);
+          localStorage.setItem('user', newUserData);
+          // Hide the loading spinner
+          setLoading(false);
+          alert('Movie successfully removed from your favorites list.');
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          // Hides the loading spinner
+          setLoading(false);
+          alert('There was an error removing the movie from your favorites list.');
+        });
+    } else {
+      alert('This movie is not in your favorites list...yet');
+    }
+  };
 
   const updateUser = (updatedUser) => {
     fetch(`/users/${user.id}`, {
@@ -151,34 +151,36 @@ export const ProfileView = ({movies, onAddFavorite, onRemoveFavorite}) => {
     <>
       <Container>
         <div className="d-flex justify-content-center text-center,mb-5">
-        <h1>Your Profile</h1>
+          <h1>Your Profile</h1>
         </div>
       </Container>
       <Container>
-         <div className="content">
-        <Row>
-          <Col md={4}>
-            <UserInfo
-              email={user.email}
-              name={user.name}
-              birthday={user.birthday}
-              onUserChange={handleUserInfoChange}
-            />
-            <UpdateUser user={user} handleSubmit={updateUser} />
-              </Col>
-          <Col md={6}>
-            <FavoriteMovies
-                  movies={movies}
-                  favorites={favorites}
-              onAddFavorite={handleAddToFavorites}
-              onRemoveFavorite={handleRemoveFromFavorites}
-            />
-          </Col>
+        <div className="content">
+          <Row>
+            <Col>
+              <Row>
+                <Col md={6}>
+                  <UserInfo
+                    email={user.email}
+                    name={user.name}
+                    birthday={user.birthday}
+                    onUserChange={handleUserInfoChange}
+                  />
+                     <UpdateUser user={user} handleSubmit={updateUser} />
+                </Col>
+                <Col md={6}>
+                  <FavoriteMovies
+                    movies={movies}
+                    favorites={favorites}
+                    onAddFavorite={handleAddToFavorites}
+                    onRemoveFavorite={handleRemoveFromFavorites}
+                  />
+                </Col>
+              </Row>
+            </Col>
           </Row>
-          </div>
-          </Container>
-          
-
-        </>
+        </div>
+      </Container>
+    </>
   );
-};
+}

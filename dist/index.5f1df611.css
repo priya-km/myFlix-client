@@ -44,8 +44,10 @@ img {
 }
 
 .content {
+  width: 100%;
   align-content: center;
   margin: auto;
+  padding: 10px;
 }
 
 .logout-button {
