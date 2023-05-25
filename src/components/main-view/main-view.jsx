@@ -227,15 +227,19 @@ export const MainView = () => {
             }
                   />
                   
-        {/* Route to user profile view */}
+          {/* Route to user profile view */}
           <Route 
             // fix username path?
             path="/users/:Username"
-            element={<ProfileView user={user} token={token} movies={movies}/>}
-          />
-          <Route path="*" element={<Navigate to="/" />} />
+              element={<ProfileView user={user} token={token} movies={movies} />}
+              
+            />
+            <Route path="*" element={<Navigate to="/" />} />
+            
         </Routes>
+        
       </Row>
+      
     </BrowserRouter>
   );
 };

@@ -27410,8 +27410,8 @@ const MainView = ()=>{
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 236,
-                            columnNumber: 11
+                            lineNumber: 237,
+                            columnNumber: 13
                         }, undefined)
                     ]
                 }, void 0, true, {
@@ -47113,6 +47113,7 @@ var _userInfo = require("./user-info");
 var _favoriteMovies = require("./favorite-movies");
 var _updateUser = require("./update-user");
 var _updateUserDefault = parcelHelpers.interopDefault(_updateUser);
+var _profileViewScss = require("./profile-view.scss");
 var _s = $RefreshSig$();
 const ProfileView = ({ movies , onAddFavorite , onRemoveFavorite  })=>{
     _s();
@@ -47256,69 +47257,63 @@ const ProfileView = ({ movies , onAddFavorite , onRemoveFavorite  })=>{
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Container), {
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                    className: "d-flex justify-content-center text-center",
-                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Container), {
-                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
-                            children: [
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
-                                    md: 4,
-                                    children: [
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _userInfo.UserInfo), {
-                                            email: user.email,
-                                            name: user.name,
-                                            birthday: user.birthday,
-                                            onUserChange: handleUserInfoChange
-                                        }, void 0, false, {
-                                            fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 162,
-                                            columnNumber: 13
-                                        }, undefined),
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _updateUserDefault.default), {
-                                            user: user,
-                                            handleSubmit: updateUser
-                                        }, void 0, false, {
-                                            fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 168,
-                                            columnNumber: 13
-                                        }, undefined)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 161,
-                                    columnNumber: 11
-                                }, undefined),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
-                                    md: 6,
-                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favoriteMovies.FavoriteMovies), {
-                                        movies: movies,
-                                        favorites: favorites,
-                                        onAddFavorite: handleAddToFavorites,
-                                        onRemoveFavorite: handleRemoveFromFavorites
+                    className: "content",
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
+                                md: 4,
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _userInfo.UserInfo), {
+                                        email: user.email,
+                                        name: user.name,
+                                        birthday: user.birthday,
+                                        onUserChange: handleUserInfoChange
                                     }, void 0, false, {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 171,
+                                        lineNumber: 161,
+                                        columnNumber: 13
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _updateUserDefault.default), {
+                                        user: user,
+                                        handleSubmit: updateUser
+                                    }, void 0, false, {
+                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                        lineNumber: 167,
                                         columnNumber: 13
                                     }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/profile-view/profile-view.jsx",
+                                lineNumber: 160,
+                                columnNumber: 11
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
+                                md: 6,
+                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favoriteMovies.FavoriteMovies), {
+                                    movies: movies,
+                                    favorites: favorites,
+                                    onAddFavorite: handleAddToFavorites,
+                                    onRemoveFavorite: handleRemoveFromFavorites
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
                                     lineNumber: 170,
-                                    columnNumber: 11
+                                    columnNumber: 13
                                 }, undefined)
-                            ]
-                        }, void 0, true, {
-                            fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 160,
-                            columnNumber: 9
-                        }, undefined)
-                    }, void 0, false, {
+                            }, void 0, false, {
+                                fileName: "src/components/profile-view/profile-view.jsx",
+                                lineNumber: 169,
+                                columnNumber: 11
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
                         fileName: "src/components/profile-view/profile-view.jsx",
                         lineNumber: 159,
-                        columnNumber: 7
+                        columnNumber: 9
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/profile-view/profile-view.jsx",
                     lineNumber: 158,
-                    columnNumber: 9
+                    columnNumber: 10
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
@@ -47338,7 +47333,7 @@ $RefreshReg$(_c, "ProfileView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./user-info":"66eot","react-bootstrap":"3AD9A","@parcel/transformer-js/src/esmodule-helpers.js":"e0MiT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4zOVh","./favorite-movies":"dTTQH","./update-user":"2SBwg"}],"66eot":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./user-info":"66eot","react-bootstrap":"3AD9A","@parcel/transformer-js/src/esmodule-helpers.js":"e0MiT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4zOVh","./favorite-movies":"dTTQH","./update-user":"2SBwg","./profile-view.scss":"eyKYH"}],"66eot":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$1330 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -47706,6 +47701,6 @@ $RefreshReg$(_c, "UpdateUser");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","@parcel/transformer-js/src/esmodule-helpers.js":"e0MiT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4zOVh"}],"lJZlQ":[function() {},{}]},["1duFE","aMbEQ","d8Dch"], "d8Dch", "parcelRequireaec4")
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","@parcel/transformer-js/src/esmodule-helpers.js":"e0MiT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4zOVh"}],"eyKYH":[function() {},{}],"lJZlQ":[function() {},{}]},["1duFE","aMbEQ","d8Dch"], "d8Dch", "parcelRequireaec4")
 
 //# sourceMappingURL=index.b4b6dfad.js.map

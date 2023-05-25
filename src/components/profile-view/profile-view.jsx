@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { UserInfo } from "./user-info";
 import { FavoriteMovies } from "./favorite-movies";
 import UpdateUser from "./update-user";
+import './profile-view.scss';
 
 export const ProfileView = ({movies, onAddFavorite, onRemoveFavorite}) => {
   const [user, setUser] = useState({movies});
@@ -148,15 +149,13 @@ export const ProfileView = ({movies, onAddFavorite, onRemoveFavorite}) => {
 
   return (
     <>
-      
       <Container>
         <div className="d-flex justify-content-center text-center,mb-5">
         <h1>Your Profile</h1>
         </div>
       </Container>
       <Container>
-        <div className="d-flex justify-content-center text-center">
-      <Container>
+         <div className="content">
         <Row>
           <Col md={4}>
             <UserInfo
@@ -166,7 +165,7 @@ export const ProfileView = ({movies, onAddFavorite, onRemoveFavorite}) => {
               onUserChange={handleUserInfoChange}
             />
             <UpdateUser user={user} handleSubmit={updateUser} />
-          </Col>
+              </Col>
           <Col md={6}>
             <FavoriteMovies
                   movies={movies}
@@ -175,10 +174,11 @@ export const ProfileView = ({movies, onAddFavorite, onRemoveFavorite}) => {
               onRemoveFavorite={handleRemoveFromFavorites}
             />
           </Col>
-        </Row>
+          </Row>
+          </div>
           </Container>
-        </div>
-        </Container>
+          
+
         </>
   );
 };

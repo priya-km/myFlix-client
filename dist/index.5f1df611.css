@@ -29,6 +29,25 @@ img {
   margin-left: 50px;
 }
 
+.fav-movie {
+  margin-bottom: 50px;
+}
+
+.remove-fav-button {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  margin-left: 10px;
+}
+
+.form.label {
+  background-color: #fff;
+}
+
+.content {
+  align-content: center;
+  margin: auto;
+}
+
 .logout-button {
   margin-top: 10px;
   margin-bottom: 10px;
