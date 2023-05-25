@@ -47432,16 +47432,36 @@ var _colDefault = parcelHelpers.interopDefault(_col);
 var _row = require("react-bootstrap/Row");
 var _rowDefault = parcelHelpers.interopDefault(_row);
 var _movieCard = require("../movie-card/movie-card");
-const FavoriteMovies = ({ movies , onAddFavorite , onRemoveFavorite  })=>{
+var _s = $RefreshSig$();
+const FavoriteMovies = ({ movies , onAddFavorite , onRemoveFavorite , onFavoriteClick , fav  })=>{
+    _s();
     const storedData = JSON.parse(localStorage.getItem("user"));
     const favorites = storedData && storedData.FavoriteMovies ? storedData.FavoriteMovies : [];
+    const [isFavorite, setIsFavorite] = (0, _react.useState)(fav);
+    const handleAddToFavorites = (event)=>{
+        event.preventDefault();
+        onAddToFavorites(movie.id);
+        setIsFavorite(true);
+    };
+    // Remove from favorites
+    const handleRemoveFromFavorites = (event)=>{
+        event.preventDefault();
+        onRemoveFromFavorites(movie.id);
+        setIsFavorite(false);
+    };
+    // Setting favorite
+    const handleFavoriteClick = (event)=>{
+        event.preventDefault();
+        if (isFavorite) setIsFavorite(false);
+        else handleAddToFavorites(event);
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
                 children: "Favorite Movies"
             }, void 0, false, {
                 fileName: "src/components/profile-view/favorite-movies.jsx",
-                lineNumber: 13,
+                lineNumber: 42,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
@@ -47449,34 +47469,36 @@ const FavoriteMovies = ({ movies , onAddFavorite , onRemoveFavorite  })=>{
                 md: 1,
                 lg: 2,
                 className: "g-4",
-                children: movies && movies.filter((movie)=>favorites.includes(movie.id)).map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+                children: movies && movies.filter((movie1)=>favorites.includes(movie1.id)).map((movie1)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                            movie: movie,
-                            fav: favorites.includes(movie.id),
+                            movie: movie1,
+                            fav: favorites.includes(movie1.id),
                             onAddToFavorites: onAddFavorite,
-                            onRemoveFromFavorites: onRemoveFavorite
+                            onRemoveFromFavorites: onRemoveFavorite,
+                            onFavoriteClick: onFavoriteClick
                         }, void 0, false, {
                             fileName: "src/components/profile-view/favorite-movies.jsx",
-                            lineNumber: 20,
+                            lineNumber: 49,
                             columnNumber: 17
                         }, undefined)
-                    }, movie.id, false, {
+                    }, movie1.id, false, {
                         fileName: "src/components/profile-view/favorite-movies.jsx",
-                        lineNumber: 19,
+                        lineNumber: 48,
                         columnNumber: 15
                     }, undefined))
             }, void 0, false, {
                 fileName: "src/components/profile-view/favorite-movies.jsx",
-                lineNumber: 14,
+                lineNumber: 43,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/profile-view/favorite-movies.jsx",
-        lineNumber: 12,
+        lineNumber: 41,
         columnNumber: 5
     }, undefined);
 };
+_s(FavoriteMovies, "oB1V3A1d+Be8oLYwS7mkMpOOBdg=");
 _c = FavoriteMovies;
 var _c;
 $RefreshReg$(_c, "FavoriteMovies");
