@@ -1,37 +1,49 @@
-import "./movie-view.scss";
-import Button from "react-bootstrap/Button";
+import React, { useState } from 'react';
+import { useParams, Link } from "react-router-dom";
+import { Card, Button } from 'react-bootstrap';
+import './movie-view.scss';
 
-export const MovieView = ({ movie, onBackClick }) => {
+export const MovieView = ({ movies }) => {
+    
+  const { movieId } = useParams();
+
+  const movie = movies.find((m) => m.id === movieId);
+
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const handleFavoriteClick = () => {
+    setIsFavorite(!isFavorite);
+  };
+
   return (
-    <div>
-      <div>
-        <img src={movie.image} alt="Movie Poster" />
-      </div>
-      <div>
-        <span>Title: </span>
-        <span>{movie.title}</span>
-      </div>
-      <div>
-        <span>Director: </span>
-        <span>{movie.director}</span>
-          </div>
-            <div>
-        <span>Genre: </span>
-        <span>{movie.genre}</span>
-          </div>
-            <div>
-        <span>Description: </span>
-        <span>{movie.description}</span>
-      </div>
-      <Button
-        onClick={onBackClick}
-        className="back-button"
-        style={{ cursor: "pointer", color: "white"}}
-      >
-        Back
-      </Button>
+      <div className="movie-view-container d-flex justify-content-center">
+        <div className="movie-image">
+      {movie ? (
+        <Card className="movie-card">
+          {movie.image ? (
+        <Card.Img variant="top" src={movie.image} alt={movie.title} />
+          ) : null}
+          <Card.Body>
+            <Card.Title>{movie.title}</Card.Title>
+            <Card.Text>{movie.description}</Card.Text>
+            <Card.Text>Director: {movie.director.Name}</Card.Text>
+            <Card.Text>
+              About {movie.director.Name}: {movie.director.Bio}
+            </Card.Text>
+            <Card.Text>Birth Year: {movie.director.Birth}</Card.Text>
+            <Card.Text>Genre: {movie.genre.Name}</Card.Text>
+            <Card.Text>
+              {movie.genre.Name} Description: {movie.genre.Description}
+                          </Card.Text>
+                          <Link to={`/`}>
+              <Button className="back-button" variant="primary" style={{ color: 'white' }}>
+                Back
+              </Button>
+            </Link>
+          </Card.Body>
+        </Card>
+              ) : null}
+              </div>
     </div>
-    
-    
   );
 };
