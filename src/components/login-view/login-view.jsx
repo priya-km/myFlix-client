@@ -1,12 +1,13 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { Row, Col, Card, CardGroup } from 'react-bootstrap';
+import { Row, Col, Card, CardGroup, Container } from 'react-bootstrap';
+import './login-view.scss';
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [ loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,43 +42,50 @@ export const LoginView = ({ onLoggedIn }) => {
         setLoading(false);
       });
   };
-  // Login form
- return (
-    <Row>
-      <Col xs={12} lg={10}>
-        <CardGroup>
-          <Card style={{ margin: '20px 0' }}>
-            <Card.Body>
-              <Card.Title>Login</Card.Title>
-              <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="formUserLogin">
-                  <Form.Label>Username:</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                    minLength="3"
-                  />
-                </Form.Group>
 
-                <Form.Group controlId="formPassword">
-                  <Form.Label>Password:</Form.Label>
-                  <Form.Control
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                </Form.Group>
-               <Button className="logout-button" variant="primary" style={{ color: 'white' }} type="submit" disabled={loading}>
-                 {loading ? "Loading..." : "Submit"}
-                </Button>
-              </Form>
-            </Card.Body>
-          </Card>
-        </CardGroup>
-      </Col>
-    </Row>
+  return (
+    <Container>
+        <div className="background">
+        <div className="login-container">
+        <Row>
+          <Col xs={12} lg={10}>
+            <CardGroup >
+              <Card className="login-card" style={{ margin: '20px 0' }}>
+                <Card.Body>
+                  <Card.Title>Login</Card.Title>
+                  <Form onSubmit={handleSubmit}>
+                    <Form.Group controlId="formUserLogin">
+                      <Form.Label>Username:</Form.Label>
+                      <Form.Control
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                        minLength="3"
+                      />
+                    </Form.Group>
+
+                    <Form.Group controlId="formPassword">
+                      <Form.Label>Password:</Form.Label>
+                      <Form.Control
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                      />
+                    </Form.Group>
+                    <Button className="logout-button" variant="primary" style={{ color: 'white' }} type="submit" disabled={loading}>
+                      {loading ? "Loading..." : "Submit"}
+                    </Button>
+                  </Form>
+                </Card.Body>
+              </Card>
+            </CardGroup>
+          </Col>
+        </Row>
+        </div>
+        </div>
+      </Container>
+
   );
 };

@@ -29,6 +29,39 @@ img {
   margin-left: 50px;
 }
 
+.background {
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: url("home-bg.e0ce65d6.jpg");
+  background-position: center;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.login-container {
+  z-index: 1;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.login-card {
+  width: 400px;
+}
+
+.navbar {
+  background-color: #0000004d;
+}
+
+.link {
+  color: #fff;
+}
+
 .fav-movie {
   margin-bottom: 50px;
 }
