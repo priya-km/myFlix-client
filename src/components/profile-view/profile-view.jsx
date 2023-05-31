@@ -150,12 +150,12 @@ export const ProfileView = ({ movies, onAddFavorite, onRemoveFavorite }) => {
   return (
     <>
       <Container>
-        <div className="d-flex justify-content-center text-center,mb-5">
+        <div className="d-flex justify-content-center profile-font text-center mb-5">
           <h1>Your Profile</h1>
         </div>
       </Container>
       <Container>
-        <div className="content">
+        <div className="content profile-font">
           <Row>
             <Col>
               <Row>
@@ -169,12 +169,14 @@ export const ProfileView = ({ movies, onAddFavorite, onRemoveFavorite }) => {
                      <UpdateUser user={user} handleSubmit={updateUser} />
                 </Col>
                 <Col md={6}>
-                  <FavoriteMovies
+                  <div className="favorite-card">
+                    <FavoriteMovies
                     movies={movies}
                     favorites={favorites}
                     onAddFavorite={handleAddToFavorites}
                     onRemoveFavorite={handleRemoveFromFavorites}
-                  />
+                    />
+                    </div>
                 </Col>
               </Row>
             </Col>

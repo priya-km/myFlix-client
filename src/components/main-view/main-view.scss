@@ -1,0 +1,29 @@
+html,
+body,
+#root {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-image: url('../../img/mainview-bg.jpg');
+  background-repeat: no-repeat;
+  background-size: 300%;
+}
+
+.main-view {
+  position: relative;
+  min-height: 100%;
+}
+
+.main-view::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+
+   }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-// import './movie-card.scss';
+import './movie-card.scss';
 
 export const MovieCard = ({ fav, movie, onAddToFavorites, onRemoveFromFavorites  }) => {
   const maxDescriptionLength = 100;
@@ -43,7 +43,7 @@ export const MovieCard = ({ fav, movie, onAddToFavorites, onRemoveFromFavorites 
   // Movie card display 
 
   return (
-    <Card className="h-100">
+    <Card className={`h-100 movie-card`}>
       <Card.Img
         variant="top"
         src={movie.image}

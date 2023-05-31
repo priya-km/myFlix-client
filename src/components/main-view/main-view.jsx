@@ -8,6 +8,9 @@ import { ProfileView } from "../profile-view/profile-view";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { BrowserRouter, Routes, Route, Navigate, } from "react-router-dom";
+
+import './main-view.scss';
+
 /* import axios from 'axios'; */
 
 export const MainView = () => {
@@ -131,124 +134,126 @@ const handleRemoveFromFavorites = (movieId) => {
 };
 
 
-return (
-  <BrowserRouter>
-  <NavigationBar
-  user={user}
-  onLoggedOut={() => {
-    setUser(null);
-    setToken(null);
-    localStorage.clear();
-    window.location.reload();
-  }}
-  />
-  <Row className="justify-content-md-center align-items-center" /* style={{ minHeight: '20vh'}} */>
-  {user && (
-    <Col xs={12} className="mb-1.5">
-    <input
-    type="text"
-    placeholder="Search movies"
-    value={searchTerm}
-    onChange={(e) => setSearchTerm(e.target.value)}
-    />
-    </Col>
-    )}
-    
-    {/* Render movie cards */}
-    {filteredMovies.map((movie) => (
-      <Col
-      key={movie.id}
-      xs={12}
-      sm={6}
-      md={4}
-      lg={3}
-      className="mb-5"
-      >
-      <MovieCard
-      movie={movie}
-      fav={user.FavoriteMovies.includes(movie.id)}
-      onAddToFavorites={(movieId) => handleAddToFavorites(movieId)}
-      onRemoveFromFavorites={(movieId) =>
-        handleRemoveFromFavorites(movieId)
-      }
-      />
-      </Col>
-      ))}
-      </Row>
-      
-      <Row className="justify-content-md-center">
-      <Routes>
-      {/* Home page with login and signup views */}
-      <Route
-      path="/"
-      element={
-        !user ? (
-          <Col md={5} className="mb-1.5">
-          <LoginView
-          className="form"
-          onLoggedIn={async (user, token) => {
-            setUser(user);
-            setToken(token);
-          }}
-          />
-          </Col>
-          ) : movies.length === 0 ? (
-            <>
-            <div>No results.</div>
-            </>
-            ) : null
-          }
+ 
+  return (
+    <div className="main-view">
+      <BrowserRouter>
+        <NavigationBar
           user={user}
-          token={token}
-          />
-          
-          <Route
-          path="/signup"
-          element={
-            <>
-            {!user ? (
-              <Col md={6}>
-              <SignupView />
-              </Col>
-              ) : (
-                <Navigate to="/" />
-                )}
+          onLoggedOut={() => {
+            setUser(null);
+            setToken(null);
+            localStorage.clear();
+            window.location.reload();
+          }}
+          searchTerm={searchTerm}
+          onSearchTermChange={(value) => setSearchTerm(value)}
+        />
+
+        <Row className="justify-content-md-center align-items-center">
+          {user && (
+            <Col xs={12} className="mb-1.5">
+              {/* Search input */}
+            </Col>
+          )}
+        </Row>
+
+        <Row className="justify-content-md-center">
+          <Routes>
+            {/* Home page with login and signup views */}
+            <Route
+              path="/"
+              element={
+                <>
+                  {!user ? (
+                    <Col md={5} className="mb-1.5">
+                      <LoginView
+                        className="form"
+                        onLoggedIn={async (user, token) => {
+                          setUser(user);
+                          setToken(token);
+                        }}
+                      />
+                    </Col>
+                  ) : movies.length === 0 ? (
+                    <>
+                      <div>No results.</div>
+                    </>
+                  ) : (
+                    // Render movie cards on the home page
+                    movies.map((movie) => (
+                      <Col
+                        key={movie.id}
+                        xs={12}
+                        sm={6}
+                        md={4}
+                        lg={3}
+                        className="mb-5"
+                      >
+                        <MovieCard
+                          movie={movie}
+                          fav={user.FavoriteMovies.includes(movie.id)}
+                          onAddToFavorites={(movieId) =>
+                            handleAddToFavorites(movieId)
+                          }
+                          onRemoveFromFavorites={(movieId) =>
+                            handleRemoveFromFavorites(movieId)
+                          }
+                        />
+                      </Col>
+                    ))
+                  )}
                 </>
               }
-              />
-              
-              
-              {/* Route to individual movie view, reroutes user back to homepage if not signed in */}
-              <Route
+              user={user}
+              token={token}
+            />
+
+            <Route
+              path="/signup"
+              element={
+                <>
+                  {!user ? (
+                    <Col md={6}>
+                      <SignupView />
+                    </Col>
+                  ) : (
+                    <Navigate to="/" />
+                  )}
+                </>
+              }
+            />
+
+            {/* Route to individual movie view, reroutes user back to homepage if not signed in */}
+            <Route
               path="/movies/:movieId"
               element={
                 <>
-                {!user ? (
-                  <Navigate to="/" replace />
+                  {!user ? (
+                    <Navigate to="/" replace />
                   ) : movies.length === 0 ? (
                     <></>
-                    ) : (
-                      <MovieView
+                  ) : (
+                    <MovieView
                       user={user}
                       token={token}
                       movies={movies}
-                      />
-                      )}
-                      </>
-                    }
                     />
-                    
-                    {/* Route to user profile view */}
-                    <Route
-                    // fix username path?
-                    path="/users/:Username"
-                    element={<ProfileView user={user} token={token} movies={movies} />}
-                    />
-                    
-                    <Route path="*" element={<Navigate to="/" />} />
-                    </Routes>
-                    </Row>
-                    </BrowserRouter>
-                    );
-                    
-                  };
+                  )}
+                </>
+              }
+            />
+
+            {/* Route to user profile view */}
+            <Route
+              path="/users/:UserName"
+              element={<ProfileView user={user} token={token} movies={movies} />}
+            />
+
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </Row>
+      </BrowserRouter>
+    </div>
+  );
+};

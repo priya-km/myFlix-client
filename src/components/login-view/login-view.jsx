@@ -49,10 +49,10 @@ export const LoginView = ({ onLoggedIn }) => {
         <div className="login-container">
         <Row>
           <Col xs={12} lg={10}>
-            <CardGroup >
+            <CardGroup>
               <Card className="login-card" style={{ margin: '20px 0' }}>
-                <Card.Body>
-                  <Card.Title>Login</Card.Title>
+                  <Card.Body>
+                      <Card.Title className="login-text">Log In</Card.Title>
                   <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="formUserLogin">
                       <Form.Label>Username:</Form.Label>
@@ -74,7 +74,11 @@ export const LoginView = ({ onLoggedIn }) => {
                         required
                       />
                     </Form.Group>
-                    <Button className="logout-button" variant="primary" style={{ color: 'white' }} type="submit" disabled={loading}>
+                      <Button
+                        className="logout-button login-submit"
+                        variant="primary"
+                        style={{ color: 'white' }}
+                        type="submit" disabled={loading}>
                       {loading ? "Loading..." : "Submit"}
                     </Button>
                   </Form>
