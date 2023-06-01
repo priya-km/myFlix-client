@@ -1,0 +1,48 @@
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  background-image: url("../../img/mf-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  z-index: 2;
+}
+
+.signup-container {
+  position: relative;
+  z-index: 2; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.signup-card {
+  width: 500px;
+  height: 600px;
+  background-color: rgba(0, 0, 0, 0.874)  !important;
+  color: white;
+}
+
+.signup-button {
+  color: white !important; 
+  background-color: white;
+}
+
+.signup-submit {
+  background-color: rgb(50, 0, 101) !important;
+  margin-top: 20 !important;
+  border: none;
+}
+
+.signup-text {
+     font-size: 20px !important;
+}
+
+.login-link {
+    color:rgb(223, 190, 255) !important;
+}

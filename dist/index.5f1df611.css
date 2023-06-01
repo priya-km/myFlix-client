@@ -29,8 +29,149 @@ img {
   margin-left: 50px;
 }
 
-.fav-movie {
-  margin-bottom: 50px;
+.movie-card {
+  color: #fff;
+  margin-top: 30px;
+  background-color: #5d429846 !important;
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: #000000b3;
+  background-image: url("mf-bg.2def9ce4.jpg");
+  background-position: center;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.login-container {
+  z-index: 2;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.login-card {
+  width: 500px;
+  height: 600px;
+  color: #fff;
+  background-color: #000000df !important;
+}
+
+.logout-button {
+  background-color: #fff;
+  color: #fff !important;
+}
+
+.login-submit {
+  border: none;
+  background-color: #320065 !important;
+  margin-top: 20px !important;
+}
+
+.login-text {
+  font-size: 20px !important;
+}
+
+.signup-link {
+  color: #dfbeff !important;
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: #000000b3;
+  background-image: url("mf-bg.2def9ce4.jpg");
+  background-position: center;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.signup-container {
+  z-index: 2;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.signup-card {
+  width: 500px;
+  height: 600px;
+  color: #fff;
+  background-color: #000000df !important;
+}
+
+.signup-button {
+  background-color: #fff;
+  color: #fff !important;
+}
+
+.signup-submit {
+  border: none;
+  background-color: #320065 !important;
+  margin-top: 20px !important;
+}
+
+.signup-text {
+  font-size: 20px !important;
+}
+
+.login-link {
+  color: #dfbeff !important;
+}
+
+.navbar {
+  background-color: #0000004d;
+}
+
+.link-color {
+  color: #fff;
+}
+
+.search-bar {
+  margin-right: 20px;
+}
+
+.submit-button {
+  color: #fff !important;
+}
+
+.custom-navbar {
+  background-color: #0000;
+}
+
+.custom-navbar .form-control {
+  color: #fff;
+  background-color: #0000;
+}
+
+.mf-logo {
+  font-size: 25px !important;
+  font-weight: bold !important;
+}
+
+.search-bar {
+  color: #fff;
+  background-color: #0000;
+}
+
+.delete-account-button {
+  margin-left: 20px;
+}
+
+.submit-button {
+  margin-right: 20px !important;
 }
 
 .remove-fav-button {
@@ -46,8 +187,52 @@ img {
 .content {
   width: 100%;
   align-content: center;
-  margin: auto;
+  margin: auto auto 20px;
   padding: 10px;
+}
+
+.profile-font {
+  color: #fff;
+  margin-top: 20px;
+}
+
+.favorite-card {
+  color: #fff;
+}
+
+.update-user-info {
+  margin-right: 30px;
+}
+
+.favorite-movies {
+  margin-left: 30px;
+}
+
+html, body, #root {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-image: url("mainview-bg.2aa76c52.jpg");
+  background-repeat: no-repeat;
+  background-size: 300%;
+}
+
+.main-view {
+  min-height: 100%;
+  position: relative;
+}
+
+.main-view:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .logout-button {

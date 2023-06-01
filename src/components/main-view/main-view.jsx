@@ -8,6 +8,8 @@ import { ProfileView } from "../profile-view/profile-view";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { BrowserRouter, Routes, Route, Navigate, } from "react-router-dom";
+import './main-view.scss';
+
 /* import axios from 'axios'; */
 
 export const MainView = () => {
@@ -17,7 +19,9 @@ export const MainView = () => {
   const [user, setUser] = useState(storedUser || null);
   const [token, setToken] = useState(storedToken || null);
   const [favorites, setFavorites] = useState([]);
-  const [loading, setLoading] = useState(false);  
+  const [loading, setLoading] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   // const [customMessage, setCustomMessage] = useState("");
   
   useEffect(() => {
@@ -43,11 +47,15 @@ export const MainView = () => {
   }); // to catch any errors when getting movie info
 }, [token]);
 
-const handleLogout = () => {
+const onLoggedOut = () => {
   setUser(null);
   setToken(null);
-  localStorage.clear(); 
+  localStorage.clear();
 };
+
+const filteredMovies = movies.filter((movie) =>
+movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+);
 
 // Add to favorites button
 
@@ -57,7 +65,7 @@ const handleAddToFavorites = (movieId) => {
   
   const movieToAdd = movies.find((movie) => movie.id === movieId);
   console.log('movieToAdd:', movieToAdd);
-  const user =JSON.parse(localStorage.getItem('user'))
+  const user = JSON.parse(localStorage.getItem('user'))
   
   
   if (favorites && favorites.some((movie) => movie.id === movieId)) {
@@ -82,12 +90,12 @@ const handleAddToFavorites = (movieId) => {
 } else {
   alert('This movie is already in your favorites list.');
 }
-};  
+};
 
 const handleRemoveFromFavorites = (movieId) => {
   const userData = JSON.parse(localStorage.getItem('user'));
   const { FavoriteMovies } = userData;
-  const favorites = [... FavoriteMovies]
+  const favorites = [...FavoriteMovies]
   const newFavorites = favorites.filter((id) => id !== movieId);
   const user = JSON.parse(localStorage.getItem('user'));
   
@@ -125,127 +133,122 @@ const handleRemoveFromFavorites = (movieId) => {
 };
 
 
+
 return (
+  <div className="main-view">
   <BrowserRouter>
   <NavigationBar
   user={user}
   onLoggedOut={() => {
-    setUser(null)
+    setUser(null);
     setToken(null);
     localStorage.clear();
     window.location.reload();
   }}
+  searchTerm={searchTerm}
+  onSearchTermChange={(value) => setSearchTerm(value)}
   />
-  <Row className="justify-content-md-center">
-  <Routes>
-  {/*  // Home page with login and signup views  */}
   
-  <Route
-  path="/"
-  element={
-    !user ? (
+  <Row className="justify-content-md-center align-items-center">
+  {user && (
+    <Col xs={12} className="mb-1.5">
+    {/* Search input */}
+    </Col>
+    )}
+    </Row>
+    
+    <Row className="justify-content-md-center">
+    <Routes>
+    {/* Home page with login and signup views */}
+    <Route
+    path="/"
+    element={
       <>
-      <Col md={5} className="mb-1.5">
-      <LoginView
-      className="form"
-      onLoggedIn={async (user, token) => {
-        setUser(user);
-        setToken(token);
-      }}
-      />
-      </Col>
-      <Col md={1} className="mb-.25" style={{ margin: '50px 0' }}>
-      or
-      </Col>
-      <Col md={4} className="mb-1.5">
-      <SignupView className="form" />
-      </Col>
-      </>
-      ) : movies.length === 0 ? (
-        <>
-        <div>No results.</div>
-        </>
-        ) : (
+      {!user ? (
+        <Col md={5} className="mb-1.5">
+        <LoginView
+        className="form"
+        onLoggedIn={async (user, token) => {
+          setUser(user);
+          setToken(token);
+        }}
+        />
+        </Col>
+        ) : movies.length === 0 ? (
           <>
-          <Col xs={12} className="mb-1.5">
-          </Col>
-          {movies.map((movie) => (
-            <Col
-            key={movie.id}
-            xs={12}
-            sm={6}
-            md={4}
-            lg={3}
-            className="mb-5"
-            >
-            <MovieCard
-            movie={movie}
-            fav={user.FavoriteMovies.includes(movie.id)}
-            onAddToFavorites={(movieId) => handleAddToFavorites(movieId)}
-            onRemoveFromFavorites={(movieId) =>
-              handleRemoveFromFavorites(movieId)
+          <div>No results.</div>
+          </>
+          ) : (
+            // Render movie cards on the home page
+            filteredMovies.map((movie) => (
+              <Col
+              key={movie.id}
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+              className="mb-5"
+              >
+              <MovieCard
+              movie={movie}
+              fav={user.FavoriteMovies.includes(movie.id)}
+              onAddToFavorites={(movieId) => handleAddToFavorites(movieId)}
+              onRemoveFromFavorites={(movieId) => handleRemoveFromFavorites(movieId)}
+              />
+              </Col>
+              ))
+              )}
+              </>
             }
+            user={user}
+            token={token}
             />
-            </Col>
-            ))}
-            </>
-            )
-          }
-          user={user}
-          token={token}
-          />
-          
-          
-          <Route
-          path="/signup"
-          element={
-            <>
-            {user ? (
-              <Navigate to="/" />
-              ) : (
+            
+            <Route
+            path="/signup"
+            element={
+              <>
+              {!user ? (
                 <Col md={6}>
                 <SignupView />
                 </Col>
-                )}
-                </>
-              }
-              />
-              
-              
-              {/*     // need a /movies request w token <<< movie csr tho */}
-              {/* // Route to individual movie view, reroutes user back to homepage if not signed in  */}
-              <Route
-              path="/movies/:movieId"
-              element={
-                <>
-                {!user ? (
-                  <Navigate to="/" replace />
-                  ) : movies.length === 0 ? (
-                    <></>
-                    ) : (
-                      <MovieView
-                      user={user}
-                      token={token}
-                      movies={movies}
+                ) : (
+                  <Navigate to="/" />
+                  )}
+                  </>
+                }
+                />
+                
+                {/* Route to individual movie view, reroutes user back to homepage if not signed in */}
+                <Route
+                path="/movies/:movieId"
+                element={
+                  <>
+                  {!user ? (
+                    <Navigate to="/" replace />
+                    ) : movies.length === 0 ? (
+                      <></>
+                      ) : (
+                        <MovieView
+                        user={user}
+                        token={token}
+                        movies={movies}
+                        />
+                        )}
+                        </>
+                      }
                       />
-                      )}
-                      </>
-                    }
-                    />
-                    
-                    {/* Route to user profile view */}
-                    <Route 
-                    // fix username path?
-                    path="/users/:Username"
-                    element={<ProfileView user={user} token={token} movies={movies} />}
-                    
-                    />
-                    <Route path="*" element={<Navigate to="/" />} />
-                    
-                    </Routes>
-                    
-                    </Row>
-                    
-                    </BrowserRouter>
-                    );
-                  };
+                      
+                      {/* Route to user profile view */}
+                      <Route
+                      path="/users/:UserName"
+                      element={<ProfileView user={user} token={token} movies={movies} />}
+                      />
+                      
+                      <Route path="*" element={<Navigate to="/" />} />
+                      </Routes>
+                      </Row>
+                      </BrowserRouter>
+                      </div>
+                      );
+                    };

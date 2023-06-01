@@ -16,4 +16,5 @@ const container = document.querySelector('#root');
 const root = createRoot(container);
 
 //React will render app in root DOM element
-root.render(<App/>);
+root.render(<App />);
+

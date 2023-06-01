@@ -1,8 +1,4 @@
-.fav-movie{
-    margin-bottom: 50px;
-    
- 
-}
+
 
 .remove-fav-button {
     margin-left: 10;
@@ -17,6 +13,27 @@
 .content{
     align-content: center;
     margin: auto;
+    margin-bottom: 20px;
     padding: 10px;
     width: 100%;
+  
+    
 }
+
+.profile-font {
+    color: white;
+    margin-top: 20px; /* Adjust the value as needed */
+}
+
+.favorite-card {
+    color: white;
+}
+
+.update-user-info {
+  margin-right: 30px; /* Adjust the value as needed */
+}
+
+.favorite-movies {
+  margin-left: 30px; /* Adjust the value as needed */
+}
+
