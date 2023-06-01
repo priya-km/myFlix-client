@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import './movie-card.scss';
 
 export const MovieCard = ({ fav, movie, onAddToFavorites, onRemoveFromFavorites  }) => {
-  const maxDescriptionLength = 100;
+  const maxDescriptionLength = 300;
   const truncatedDescription =
     movie.description.length > maxDescriptionLength
       ? `${movie.description.substring(0, maxDescriptionLength)}...`

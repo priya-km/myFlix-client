@@ -8,7 +8,6 @@ import { ProfileView } from "../profile-view/profile-view";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { BrowserRouter, Routes, Route, Navigate, } from "react-router-dom";
-
 import './main-view.scss';
 
 /* import axios from 'axios'; */
@@ -181,27 +180,23 @@ const handleRemoveFromFavorites = (movieId) => {
                     </>
                   ) : (
                     // Render movie cards on the home page
-                    movies.map((movie) => (
-                      <Col
-                        key={movie.id}
-                        xs={12}
-                        sm={6}
-                        md={4}
-                        lg={3}
-                        className="mb-5"
-                      >
-                        <MovieCard
-                          movie={movie}
-                          fav={user.FavoriteMovies.includes(movie.id)}
-                          onAddToFavorites={(movieId) =>
-                            handleAddToFavorites(movieId)
-                          }
-                          onRemoveFromFavorites={(movieId) =>
-                            handleRemoveFromFavorites(movieId)
-                          }
-                        />
-                      </Col>
-                    ))
+                    filteredMovies.map((movie) => (
+  <Col
+    key={movie.id}
+    xs={12}
+    sm={6}
+    md={4}
+    lg={3}
+    className="mb-5"
+  >
+    <MovieCard
+      movie={movie}
+      fav={user.FavoriteMovies.includes(movie.id)}
+      onAddToFavorites={(movieId) => handleAddToFavorites(movieId)}
+      onRemoveFromFavorites={(movieId) => handleRemoveFromFavorites(movieId)}
+    />
+  </Col>
+))
                   )}
                 </>
               }

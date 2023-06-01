@@ -18,7 +18,7 @@ export const NavigationBar = ({ user, onLoggedOut, searchTerm, onSearchTermChang
     <Navbar className="custom-navbar custom-navbar fixed-top" expand="lg" style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }}>
       <Container>
         <Navbar.Brand as={Link} to="/">
-          <div className="link-color">
+          <div className="link-color mf-logo">
             myFlix
           </div>
         </Navbar.Brand>
@@ -66,7 +66,7 @@ export const NavigationBar = ({ user, onLoggedOut, searchTerm, onSearchTermChang
                   </div>
               </Form>
               <div className="link-color ml-3">
-                <Button variant="outline-secondary" size="sm" onClick={onLoggedOut}>
+                <Button variant="outline-secondary" className="submit-button" size="sm" onClick={onLoggedOut}>
                   Log out
                 </Button>
               </div>

@@ -1,3 +1,4 @@
+
 .background {
   position: fixed;
   top: 0;
@@ -11,7 +12,7 @@
   z-index: 2;
 }
 
-.login-container {
+.signup-container {
   position: relative;
   z-index: 2; 
   display: flex;
@@ -20,28 +21,28 @@
   height: 100vh;
 }
 
-.login-card {
+.signup-card {
   width: 500px;
   height: 600px;
   background-color: rgba(0, 0, 0, 0.874)  !important;
   color: white;
 }
 
-.logout-button {
+.signup-button {
   color: white !important; 
   background-color: white;
 }
 
-.login-submit {
+.signup-submit {
   background-color: rgb(50, 0, 101) !important;
   margin-top: 20 !important;
   border: none;
 }
 
-.login-text {
+.signup-text {
      font-size: 20px !important;
 }
 
-.signup-link {
+.login-link {
     color:rgb(223, 190, 255) !important;
 }

@@ -155,21 +155,23 @@ export const ProfileView = ({ movies, onAddFavorite, onRemoveFavorite }) => {
         </div>
       </Container>
       <Container>
-        <div className="content profile-font">
+        <div className="content profile-font mb-5">
           <Row>
             <Col>
               <Row>
                 <Col md={6}>
+                  <div className="update-user-info">
                   <UserInfo
                     email={user.email}
                     name={user.name}
                     birthday={user.birthday}
                     onUserChange={handleUserInfoChange}
                   />
-                     <UpdateUser user={user} handleSubmit={updateUser} />
+                    <UpdateUser user={user} handleSubmit={updateUser} />
+                    </div>
                 </Col>
                 <Col md={6}>
-                  <div className="favorite-card">
+                  <div className="favorite-card favorite-movies">
                     <FavoriteMovies
                     movies={movies}
                     favorites={favorites}
