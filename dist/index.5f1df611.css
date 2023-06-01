@@ -166,6 +166,14 @@ img {
   background-color: #0000;
 }
 
+.delete-account-button {
+  margin-left: 20px;
+}
+
+.submit-button {
+  margin-right: 20px !important;
+}
+
 .remove-fav-button {
   margin-top: 10px;
   margin-bottom: 30px;

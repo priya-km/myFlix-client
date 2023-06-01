@@ -4,26 +4,26 @@ import { Card, Form, Button } from 'react-bootstrap';
 
 export const UserInfo = ({ email, name, birthday, onUserChange }) => {
   const [user, setUser] = useState({ email, name, birthday });
-
+  
   useEffect(() => {
     fetch("/users")
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error("Error, please try again.");
-      })
-      .then(data => {
-        const loggedInUser = data.find(u => u.Username === "your-Username");
-        setUser(loggedInUser);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error("Error, please try again.");
+    })
+    .then(data => {
+      const loggedInUser = data.find(u => u.Username === "your-Username");
+      setUser(loggedInUser);
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }, []);
-
+  
   const getUser = () => {
-    fetch(`/users/${user.id}`, {
+    fetch(`/users/${user.Username}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -34,26 +34,26 @@ export const UserInfo = ({ email, name, birthday, onUserChange }) => {
         birthday: user.birthday
       })
     })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error("There was an error updating your information.");
-      })
-      .then(data => {
-        setUser(data);
-        onUserChange(data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error("There was an error updating your information.");
+    })
+    .then(data => {
+      setUser(data);
+      onUserChange(data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }
-
-    // fix 
+  
+  // fix 
   const handleInputChange = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
   }
-
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     getUser();

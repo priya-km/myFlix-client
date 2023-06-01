@@ -133,122 +133,122 @@ const handleRemoveFromFavorites = (movieId) => {
 };
 
 
- 
-  return (
-    <div className="main-view">
-      <BrowserRouter>
-        <NavigationBar
-          user={user}
-          onLoggedOut={() => {
-            setUser(null);
-            setToken(null);
-            localStorage.clear();
-            window.location.reload();
-          }}
-          searchTerm={searchTerm}
-          onSearchTermChange={(value) => setSearchTerm(value)}
+
+return (
+  <div className="main-view">
+  <BrowserRouter>
+  <NavigationBar
+  user={user}
+  onLoggedOut={() => {
+    setUser(null);
+    setToken(null);
+    localStorage.clear();
+    window.location.reload();
+  }}
+  searchTerm={searchTerm}
+  onSearchTermChange={(value) => setSearchTerm(value)}
+  />
+  
+  <Row className="justify-content-md-center align-items-center">
+  {user && (
+    <Col xs={12} className="mb-1.5">
+    {/* Search input */}
+    </Col>
+    )}
+    </Row>
+    
+    <Row className="justify-content-md-center">
+    <Routes>
+    {/* Home page with login and signup views */}
+    <Route
+    path="/"
+    element={
+      <>
+      {!user ? (
+        <Col md={5} className="mb-1.5">
+        <LoginView
+        className="form"
+        onLoggedIn={async (user, token) => {
+          setUser(user);
+          setToken(token);
+        }}
         />
-
-        <Row className="justify-content-md-center align-items-center">
-          {user && (
-            <Col xs={12} className="mb-1.5">
-              {/* Search input */}
-            </Col>
-          )}
-        </Row>
-
-        <Row className="justify-content-md-center">
-          <Routes>
-            {/* Home page with login and signup views */}
-            <Route
-              path="/"
-              element={
-                <>
-                  {!user ? (
-                    <Col md={5} className="mb-1.5">
-                      <LoginView
-                        className="form"
-                        onLoggedIn={async (user, token) => {
-                          setUser(user);
-                          setToken(token);
-                        }}
-                      />
-                    </Col>
-                  ) : movies.length === 0 ? (
-                    <>
-                      <div>No results.</div>
-                    </>
-                  ) : (
-                    // Render movie cards on the home page
-                    filteredMovies.map((movie) => (
-  <Col
-    key={movie.id}
-    xs={12}
-    sm={6}
-    md={4}
-    lg={3}
-    className="mb-5"
-  >
-    <MovieCard
-      movie={movie}
-      fav={user.FavoriteMovies.includes(movie.id)}
-      onAddToFavorites={(movieId) => handleAddToFavorites(movieId)}
-      onRemoveFromFavorites={(movieId) => handleRemoveFromFavorites(movieId)}
-    />
-  </Col>
-))
-                  )}
-                </>
-              }
-              user={user}
-              token={token}
+        </Col>
+        ) : movies.length === 0 ? (
+          <>
+          <div>No results.</div>
+          </>
+          ) : (
+            // Render movie cards on the home page
+            filteredMovies.map((movie) => (
+              <Col
+              key={movie.id}
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+              className="mb-5"
+              >
+              <MovieCard
+              movie={movie}
+              fav={user.FavoriteMovies.includes(movie.id)}
+              onAddToFavorites={(movieId) => handleAddToFavorites(movieId)}
+              onRemoveFromFavorites={(movieId) => handleRemoveFromFavorites(movieId)}
+              />
+              </Col>
+              ))
+              )}
+              </>
+            }
+            user={user}
+            token={token}
             />
-
+            
             <Route
-              path="/signup"
-              element={
-                <>
-                  {!user ? (
-                    <Col md={6}>
-                      <SignupView />
-                    </Col>
-                  ) : (
-                    <Navigate to="/" />
+            path="/signup"
+            element={
+              <>
+              {!user ? (
+                <Col md={6}>
+                <SignupView />
+                </Col>
+                ) : (
+                  <Navigate to="/" />
                   )}
-                </>
-              }
-            />
-
-            {/* Route to individual movie view, reroutes user back to homepage if not signed in */}
-            <Route
-              path="/movies/:movieId"
-              element={
-                <>
+                  </>
+                }
+                />
+                
+                {/* Route to individual movie view, reroutes user back to homepage if not signed in */}
+                <Route
+                path="/movies/:movieId"
+                element={
+                  <>
                   {!user ? (
                     <Navigate to="/" replace />
-                  ) : movies.length === 0 ? (
-                    <></>
-                  ) : (
-                    <MovieView
-                      user={user}
-                      token={token}
-                      movies={movies}
-                    />
-                  )}
-                </>
-              }
-            />
-
-            {/* Route to user profile view */}
-            <Route
-              path="/users/:UserName"
-              element={<ProfileView user={user} token={token} movies={movies} />}
-            />
-
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </Row>
-      </BrowserRouter>
-    </div>
-  );
-};
+                    ) : movies.length === 0 ? (
+                      <></>
+                      ) : (
+                        <MovieView
+                        user={user}
+                        token={token}
+                        movies={movies}
+                        />
+                        )}
+                        </>
+                      }
+                      />
+                      
+                      {/* Route to user profile view */}
+                      <Route
+                      path="/users/:UserName"
+                      element={<ProfileView user={user} token={token} movies={movies} />}
+                      />
+                      
+                      <Route path="*" element={<Navigate to="/" />} />
+                      </Routes>
+                      </Row>
+                      </BrowserRouter>
+                      </div>
+                      );
+                    };
