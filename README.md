@@ -9,6 +9,9 @@ about different movies. With myFlix, having the ability to save a list of their 
 users always have access to the films they want to watch or recommend to their peers.
 <br>
 <br>
+<h3> [Click here for the LIVE VIEW of myFlix](https://myflixpkm.netlify.app/ "myFlix live view link") </h3>
+<br>
+<br>
 This is the client side to  [this RESTful movie API](https://github.com/priya-km/myflix-app "this RESTful movie API"), both together built with the **MERN** stack
 <br>
 <h1>Essential Views & Features<h1>
