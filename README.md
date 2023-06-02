@@ -61,8 +61,8 @@ This is the client side to  [this RESTful movie API](https://github.com/priya-km
 ● Bootstrap & React Bootstrap <br>
   
 <h1>Technical Requirements</h1>
-● Uses parcel as a build tool<br>
-● Hosted on Netlify<br>
-● API is hosted on Heroku<br>  
-● Written using the React library in ES2015+ <br>
-● Uses Bootstrap as a UI library for styling and responsiveness<br>
+● Uses **parcel** as a build tool<br>
+● Hosted on **Netlify**<br>
+● API is hosted on **Heroku**<br>  
+● Written using the **React library** in ES2015+ <br>
+● Uses **Bootstrap** as a UI library for styling and responsiveness<br>
