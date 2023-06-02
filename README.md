@@ -14,7 +14,12 @@ users always have access to the films they want to watch or recommend to their p
 <br>
 This is the client side to  [this RESTful movie API](https://github.com/priya-km/myflix-app "this RESTful movie API"), both together built with the **MERN** stack
 <br>
-<h1>Essential Views & Features<h1>
+<h1>User Stories</h1>
+● As a user, I want to be able to access information about movies so that I can learn more
+about movies I’ve watched or am interested in. <br>
+● As a user, I want to be able to create a profile so I can save data about my favorite movies.
+
+<h1>Essential Views & Features</h1>
 <h2>Main view</h2>
   
 ![mainview](https://github.com/priya-km/myFlix-client/assets/118628757/2bd11aed-e267-4cd6-9e11-afdb9a238820 "Screenshot of mainview")
