@@ -74,3 +74,12 @@ about movies I’ve watched or am interested in. <br>
 ● API is hosted on Heroku<br>  
 ● Written using the React library in ES2015+ <br>
 ● Uses Bootstrap as a UI library for styling and responsiveness<br>
+
+<h2>Author</h2>
+<h3>Priya K Maharban</h3>
+
+● [GitHub Profile](https://github.com/priya-km "Priya-Maharban GitHub profile link")
+<br>
+● [Email](mailto:priyakmaharban@gmail.com?subject=Hi% "Hi!")
+<br>
+● [Portfolio Website](https://priya-km.github.io/portfolio "Priya Maharban Portfolio website")
